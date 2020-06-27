@@ -1,0 +1,31 @@
+﻿<Project  InitialTargets="SetVersion" Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Version>0.0.0-dev$([System.DateTime]::Now.ToString(yyMMddhhmm))</Version>
+    <Title>Ryu.NET</Title>
+    <Description>
+      <![CDATA[ _Scratch project for testing ]]>
+    </Description>
+    <RepositoryUrl>https://github.com/Ninds/_Scratch</RepositoryUrl>
+    <RepositoryCommit>$(GITHUB_SHA)</RepositoryCommit>
+    <RepositoryBranch>$(GITHUB_REF)</RepositoryBranch>
+  </PropertyGroup>
+
+ 
+  <PropertyGroup Condition=" '$(GITHUB_REF)' == 'refs/heads/release' and '$(CI)' == 'true' ">
+    <Version>$([System.DateTime]::Now.ToString(yy.MM.dd))</Version>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(GITHUB_REF)' == 'refs/heads/prerelease' and '$(CI)' == 'true'  ">
+    <Version>$([System.DateTime]::Now.ToString(yy.MM.dd))-dev</Version>
+  </PropertyGroup>
+
+
+  <Target Name="SetVersion">
+    <Message Text="::set-output name=version::$(Version)" Importance="high" />
+  </Target>
+
+</Project>
