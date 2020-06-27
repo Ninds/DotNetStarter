@@ -64,6 +64,7 @@ jobs:
           artifacts: "package_output/*.nupkg"
           prerelease: true
           draft: true
+          tag: "${{ steps.Build_Package.outputs.version }}"
           token: ${{ secrets.GITHUB_TOKEN }}
               
         
