@@ -51,12 +51,19 @@ jobs:
       - uses: actions/checkout@v2
       - name: Build_Package
         run : |
-              dotnet pack ClassLibrary\\ClassLibrary.csproj -c Release --output=../package_output
+              dotnet pack ClassLibrary\\ClassLibrary.csproj -c Release --output=package_output
         id  : Build_Package
       - name: Tag commit
         uses: tvdias/github-tagger@v0.0.1
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
           tag: "${{ steps.Build_Package.outputs.version }}"
+      - name: Release
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "package_output/*.nupkg"
+          prerelease: true
+          draft: true
+          token: ${{ secrets.GITHUB_TOKEN }}
               
         
