@@ -1,0 +1,49 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netcoreapp3.1;netcoreapp5.0</TargetFrameworks>
+    <Version>0.0.0-dev$([System.DateTime]::Now.ToString(yyMMddhhmm))</Version>
+    <Title>Ryu.NET</Title>
+    <Description>
+      <![CDATA[ Just a scratch repo for testing]]>
+    </Description>
+    <RepositoryUrl>https://github.com/Ninds/_Scratch</RepositoryUrl>
+    <RepositoryCommit>$(GITHUB_SHA)</RepositoryCommit>
+    <RepositoryBranch>$(GITHUB_REF)</RepositoryBranch>
+    <PackageLicenseExpression>BSL-1.0 OR Apache-2.0</PackageLicenseExpression>
+  </PropertyGroup>
+
+  
+  
+  <ItemGroup>
+    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="4.7.1" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.6.1" />
+    <PackageReference Include="xunit" Version="2.4.1" />
+    <PackageReference Include="xunit.abstractions" Version="2.0.3" />
+    <PackageReference Include="xunit.assert" Version="2.4.1" />
+    <PackageReference Include="xunit.core" Version="2.4.1" />
+    <PackageReference Include="xunit.extensibility.core" Version="2.4.1" />
+    <PackageReference Include="xunit.extensibility.execution" Version="2.4.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  
+  
+  <ItemGroup>
+    <ProjectReference Include="..\ClassLibrary\ClassLibrary.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup Condition=" '$(IsRelease)' == 'true' ">
+    <Version>$([System.DateTime]::Now.ToString(yy.MM.dd))</Version>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(IsPreRelease)' == 'true' ">
+    <Version>$([System.DateTime]::Now.ToString(yy.MM.dd))-dev</Version>
+  </PropertyGroup>
+
+
+
+</Project>
